@@ -1,0 +1,27 @@
+services:
+  rl_learning:
+
+    build:
+      context: ..
+      dockerfile: rl_learning/Dockerfile
+
+    image: rl_learning:latest
+
+    container_name: rl-ethan-learning
+
+    gpus: all
+
+    tty: true
+    stdin_open: true
+
+    shm_size: "16gb"
+
+    working_dir: /workspace
+
+    volumes:
+      - ~/RL_workspace:/workspace
+
+    environment:
+      - PYTHONUNBUFFERED=1
+
+    command: /bin/bash
