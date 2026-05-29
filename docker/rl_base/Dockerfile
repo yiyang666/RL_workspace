@@ -37,12 +37,11 @@ RUN apt-get update && apt-get install -y \
 RUN python3 -m pip install --upgrade pip setuptools wheel
 
 # =========================
-# PyTorch (CUDA 12.6)
+# PyTorch (CUDA 13.2)
 # =========================
-RUN pip install \
-    torch \
-    torchvision \
-    torchaudio
+RUN pip install --no-cache-dir \
+    torch torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu132
 
 # =========================
 # Workspace
