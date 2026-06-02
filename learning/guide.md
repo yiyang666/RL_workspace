@@ -169,25 +169,45 @@ rl_workspace/
 ├── venv/
 ├── learning/
 │   ├── easy_rl/  # 这是一个开源的强化学习笔记库
+    ├── common/   #  共享代码,重复模块可以提炼到这里
+        ├── seed.py
+        ├── logger.py
+        ├── env_wrappers.py 
 │   ├── pytorch_basics/  # pytorch 基础练习
-│   ├── gymnasium_playground/  # 主要围绕 Gymnasium 环境（CartPole 等）来做”
+│   ├── gymnasium_playground/  # 主要围绕 Gymnasium 环境（CartPole 等）来做
 │       ├── classic-control/
 │          ├── cartpole_random.py
 │          ├── cartpole_dqn/
-│          └──  cartpole_ppo/
-│   ├── ppo_experiments/
-│   │   ├── train.py
-│   │   ├── eval.py
-│   │   ├── config.py
-│   │   ├── models.py
-│   │   ├── envs.py
-│   │   └── runs/
-│   └── sac_experiments/
-│   ├── robot_control/
-│   └── mujoco_playground/
-├── logs/
-├── models/
-└── scripts/
+│          └── cartpole_ppo/
+│   ├── experiments/  # 经典RL reseach layout
+        ├── configs/  # 管理实验超参数
+        │   ├── cartpole_ppo.yaml
+        ├── envs/  # 统一管理环境创建，环境会越来越复杂
+        │   ├── make_env.py
+        ├── models/  # 定义神经网络结构
+        │   ├── policy.py
+        ├── algorithms/  # ppo核心数学逻辑
+        │   ├── ppo.py
+        ├── rollout/  # 存 trajectory 数据，因为 on-policy batch update
+        │   ├── buffer.py
+        ├── trainers/  # 组织整个训练循环
+        │   ├── trainer.py
+        ├── evaluate/  # 专门负责测试
+        │   ├── eval.py
+        ├── utils/  # 工程基础设施
+        │   ├── logger.py  # tensorboard/reward log/loss log
+        │   ├── seed.py
+        │   ├── plot.py
+        ├── scripts/  # 用户入口
+        │   ├── train.py  # 负责加载config, 创建env, 创建trainer, 开始训练
+        │   ├── play.py  # 加载checkpoint, 播放agent
+        |   
+        └── README.md
+    ├── logs/
+    ├── checkponits/  # 保存 policy_100k.pt
+    ├── robot_control/
+    ├── mujoco_playground/
+    └── guide.md
 ```
 
 ---
